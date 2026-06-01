@@ -1,0 +1,35 @@
+<% layout("./layouts/basic.ejs") %>
+
+    <body>
+        <div class="row">
+            <form action="/listings/new" method="POST" novalidate class="needs-validation">
+                <div class="col-8 offset-2">
+                    <label for="title" class="form-label">Title</label>
+                    <input type="text" name="listing[title]" id="title" placeholder="Enter Title" class="form-control" required>
+                    <br>
+                    <label for="title" class="form-label">Description</label>
+                    <textarea type="text" name="listing[description]" id="description" placeholder="Enter description"
+                        class="form-control" required></textarea><br>
+                    <label for="title" class="form-label">Image</label>
+                    <input type="text" name="listing[image.url]" id="image" placeholder="Enter image url/link"
+                        class="form-control"><br>
+                    <div class="row">
+                        <div class="col-md-4">
+                            <label for="title" class="form-label">Location</label>
+                            <input type="text" name="listing[location]" id="locaion" placeholder="Enter location"
+                                class="form-control" required><br>
+                        </div>
+                        <div class="col-md-8">
+                            <label for="title" class="form-label">Price</label>
+                            <input type="number" name="listing[price]" id="price" placeholder="Enter price"
+                                class="form-control" required><br>
+                        </div>
+                    </div>
+                    <label for="title" class="form-label" >Country</label>
+                    <input type="text" name="listing[country]" id="country" placeholder="Enter country"
+                        class="form-control" required><br>
+                    <button class="btn btn-bg-dark add-btn">Add</button>
+                </div>
+            </form>
+        </div>
+    </body>
