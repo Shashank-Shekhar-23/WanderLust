@@ -11,7 +11,7 @@ const validateListing = (req, res, next) => {
   let { error } = listingSchema.validate(req.body);
 
   if (error) {
-    let errMsg = error.detals.map((el) => el.message).join(",");
+    let errMsg = error.details.map((el) => el.message).join(",");
     throw new ExpressError(400, error);
   } else {
     next();
@@ -42,6 +42,12 @@ router.post('/new', validateListing, wrapAsync(async (req, res) => {
 router.get('/:id/edit', async (req, res) => {
   let { id } = req.params;
   const listing = await Listing.findById(id);
+
+  if (!listing) {
+    req.flash("error", "No such listing found!!");
+    return res.redirect("/listings");
+  } 
+  
   res.render('./listings/edit.ejs', { listing });
 
   // res.redirect('/listings');
@@ -75,7 +81,7 @@ router.get('/:id', async (req, res) => {
 
   if (!listing) {
     req.flash("error", "No such listing found!!");
-    res.redirect("/listings");
+    return res.redirect("/listings");
   } 
   res.render('./listings/show.ejs', { listing });
 });

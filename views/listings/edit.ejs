@@ -8,7 +8,7 @@
                     <h2>Edit Your Listing</h2>
                     <br>
                     <label for="title" class="form-label">Title</label>
-                    <input type="text" name=" listing[title]" id="title" class="form-control" required
+                    <input type="text" name="listing[title]" id="title" class="form-control" required
                         value="<%= listing.title %>"> <br>
                     <label for="title" class="form-label">Description</label>
                     <textarea type="text" name="listing[description]" id="description"
@@ -26,7 +26,7 @@
                         </div>
                     </div>
                     <label for="title" class="form-label">Image</label>
-                    <input type="text" name="listing[image.url]" id="image" class="form-control" required
+                    <input type="text" name="listing[image][url]" id="image" class="form-control" required
                         value="<%= listing.image.url %>"><br>
                     <label for="title" class="form-label">Country</label>
                     <input type="text" name="listing[country]" id="country" class="form-control" required
