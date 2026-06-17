@@ -7,6 +7,7 @@
                     <%= listing.title %>
                 </h3>
                 <img src="<%= listing.image.url %>" alt="listing_img" class="listing-img">
+                <p>Owned by: <i><%= listing.owner.username %></i></p>
                 <p class="show-des">
                     <%= listing.description %>
                 </p>
@@ -16,12 +17,14 @@
                         </p>
                         <p>Country: <%= listing.country %>
                         </p>
+                        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
                         <div class="show-btns">
                             <a href="/listings/<%= listing._id %>/edit" class="btn btn-bg-dark edit-btn">Edit</a>
                             <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
                                 <button class="btn btn-bg-dark edit-btn">Delete</button>
                             </form>
                         </div>
+                        <% } %>
             </div>
         </div>
 
@@ -46,6 +49,7 @@
 
         <div class="col-8 offset-2 mb-3">
             <hr>
+            <% if(currUser) { %>
             <h4>Leave a Review</h4>
             <form action="/listings/<%= listing._id %>/reviews" method="POST" novalidate class="needs-validation">
                 <div class="mb-3 mt-3">
@@ -61,6 +65,7 @@
 
                 <button class="btn btn-outline-dark">Submit</button>
             </form>
+            <% } %>
 
             <hr>
 
@@ -69,7 +74,7 @@
                 <% for(review of listing.reviews) { %>
                     <div class="card col-5 mb-2 ms-2">
                         <div class="card-body">
-                            <h5 class="card-title">Title</h5>
+                            <h5 class="card-title">@<%= review.author.username %></h5>
                             <p class="card-text">
                                 <%= review.comment %>
                             </p>
