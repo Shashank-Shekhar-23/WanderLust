@@ -17,3 +17,21 @@
       }, false)
     })
 })()
+
+// 18% GST
+document.addEventListener("DOMContentLoaded", () => {
+  const taxToggler = document.getElementById("flexSwitchCheck");
+  taxToggler.addEventListener("click", () => {
+    const basePrices = document.getElementsByClassName("base-price");
+    const taxedPrices = document.getElementsByClassName("taxed-price");
+    for (let i = 0; i < basePrices.length; i++) {
+      if (basePrices[i].style.display !== "none") {
+        basePrices[i].style.display = "none";
+        taxedPrices[i].style.display = "inline";
+      } else {
+        basePrices[i].style.display = "inline";
+        taxedPrices[i].style.display = "none";
+      }
+    }
+  });
+});

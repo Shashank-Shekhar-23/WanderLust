@@ -1,3 +1,7 @@
+if (process.env.NODE_ENV != 'production') {
+  require('dotenv').config();
+}
+
 const express = require('express');
 const app = express();
 const port = 3000;
@@ -7,12 +11,21 @@ const methodOverride = require('method-override');
 const ejsMate = require("ejs-mate");
 const { nextTick } = require('process');
 const session = require('express-session');
+const MongoStore = require('connect-mongo').MongoStore;
 const flash = require('connect-flash');
+const passport = require('passport');
+const LocalStrategy = require('passport-local');
+const User = require('./Models/user.js');
 
 
-const listings = require("./routes/listing.js");
-const reviews = require("./routes/review.js");
+const listingRouter = require("./routes/listing.js");
+const reviewRouter = require("./routes/review.js");
+const userRouter = require("./routes/user.js");
 
+// const dbURL = process.env.ATLASDB_URL;
+const dbURL = 'mongodb://127.0.0.1:27017/WanderLust';
+
+const secret = process.env.SECRET;
 
 //Error
 const ExpressError = require('./ExpError.js');
@@ -35,11 +48,24 @@ main()
   .catch(err => console.log(err));
 
 async function main() {
-  await mongoose.connect('mongodb://127.0.0.1:27017/WanderLust');
+  await mongoose.connect(dbURL);
 }
 
+const store = MongoStore.create({
+  mongoUrl: dbURL,
+  crypto: {
+    secret: secret,
+  },
+  touchAfter: 24 * 3600
+});
+
+store.on("error", (err) => {
+  console.log("Error in MONGO SESSION STORE", err);
+});
+
 const sessionOptions = {
-  secret: "Code",
+  store,
+  secret: secret,
   resave: false,
   saveUnintialized: true,
   cookie: {
@@ -52,9 +78,16 @@ const sessionOptions = {
 app.use(session(sessionOptions));
 app.use(flash());
 
-app.get('/', (req, res) => {
+app.use(passport.initialize());
+app.use(passport.session());
+passport.use(new LocalStrategy(User.authenticate()));
+
+passport.serializeUser(User.serializeUser());
+passport.deserializeUser(User.deserializeUser());
+
+/* app.get('/', (req, res) => {
   res.send('Server is working well.');
-});
+}); */
 
 //Api
 const checkToken = (req, res, next) => {
@@ -79,14 +112,27 @@ app.get('/api', checkToken, (req, res) => {
   next(err);
 }); */
 
-app.use((req,res,next) => {
+app.use((req, res, next) => {
   res.locals.success = req.flash("success");
   res.locals.error = req.flash("error");
+  res.locals.currUser = req.user;
   next();
 });
 
-app.use("/listings", listings);
-app.use("/listings/:id/reviews", reviews);
+//Demo User
+/* app.get("/demouser", async(req, res) => {
+  let fakeUser = new User({
+    email: "student@gmail.com",
+    username: "student",
+  });
+
+  let registeredUser = await User.register(fakeUser, "helloworld");
+  res.send(registeredUser);
+}) */
+
+app.use("/listings", listingRouter);
+app.use("/listings/:id/reviews", reviewRouter);
+app.use("/", userRouter);
 
 /* app.get('/testListing', async (req, res) => {
   let sampleListing = new Listing({
@@ -131,5 +177,5 @@ app.use((err, req, res, next) => {
 });
 
 app.listen(port, () => {
-  console.log(`Server listening on port port`);
+  console.log(`Server listening on port ${port}`);
 });
