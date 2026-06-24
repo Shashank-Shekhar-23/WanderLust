@@ -20,16 +20,18 @@ module.exports.saveRedirectUrl = (req, res, next) => {
 }
 
 module.exports.isOwner = async (req, res, next) => {
-    let { id } = req.params;
-    let listing = await Listing.findById(id);
-
+    const { id } = req.params;
+    const listing = await Listing.findById(id);
+    if (!listing) {
+        req.flash("error", "Listing not found");
+        return res.redirect("/listings");
+    }
     if (!listing.owner.equals(res.locals.currUser._id)) {
         req.flash("error", "You don't have permission for this action!!");
         return res.redirect(`/listings/${id}`);
     }
-
     next();
-}
+};
 
 module.exports.isReviewAuthor = async (req, res, next) => {
     let { id, reviewID } = req.params;

@@ -1,65 +1,23 @@
 <% layout("./layouts/basic.ejs") %>
+
     <body>
         <div id="filters">
-            <div class="filter">
-                <i class="fa-solid fa-fire"></i>
-                <p>Trending</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-bed"></i>
-                <p>Rooms</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-mountain-city"></i>
-                <p>Iconic Cities</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-mountain"></i>
-                <p>Mountains</p>
-            </div>
-            <div class="filter">
-                <i class="fa-brands fa-fort-awesome"></i>
-                <p>Castles</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-person-swimming"></i>
-                <p>Pools</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-campground"></i>
-                <p>Camping</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-cow"></i>
-                <p>Farms</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-snowflake"></i>
-                <p>Arctic</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-umbrella-beach"></i>
-                <p>Beach</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-water"></i>
-                <p>Lake</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-igloo"></i>
-                <p>Domes</p>
-            </div>
-            <div class="filter">
-                <i class="fa-solid fa-ship"></i>
-                <p>Boats</p>
-            </div>
-
-            <div class="tax-toggle">
-                <div class="form-check-reverse form-switch">
-                    <input type="checkbox" class="form-check-input" role="switch" id="flexSwitchCheck">
-                    <label for="flexSwitchCheck" class="form-check-label">Display Taxes</label>
-                </div>
-            </div>
+            <% filters.forEach(filter=> { %>
+                <a href="<%= filter.link %>" class="filter-link">
+                    <div class="filter" style="opacity:<%= filter.isActive ? '1' : '0.7' %>;">
+                        <i class="fa-solid <%= filter.icon %>"></i>
+                        <p>
+                            <%= filter.name %>
+                        </p>
+                    </div>
+                </a>
+                <% }) %>
+                    <div class="tax-toggle">
+                        <div class="form-check-reverse form-switch">
+                            <input type="checkbox" class="form-check-input" role="switch" id="flexSwitchCheck">
+                            <label for="flexSwitchCheck" class="form-check-label">Display Taxes</label>
+                        </div>
+                    </div>
         </div>
         <div class="row">
             <% for(let listing of allListings) { %>
@@ -76,8 +34,12 @@
                             </h5>
                             <p class="card-text">
                                 &#8377;
-                                <span class="base-price"><%= listing.price.toLocaleString("en-IN") %></span>
-                                <span class="taxed-price" style="display: none;"><%= (listing.price * 1.18).toLocaleString("en-IN") %></span>
+                                <span class="base-price">
+                                    <%= listing.price.toLocaleString("en-IN") %>
+                                </span>
+                                <span class="taxed-price" style="display: none;">
+                                    <%= (listing.price * 1.18).toLocaleString("en-IN") %>
+                                </span>
                                 /night
                             </p>
                         </div>

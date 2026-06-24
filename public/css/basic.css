@@ -15,7 +15,7 @@
 /* Preventing the wobble effect */
 html,
 body {
-    height: 100vh;
+    min-height: 100vh;
     overscroll-behavior: none;
 }
 
@@ -31,13 +31,13 @@ html {
 
 /* Footer Bottom Stick */
 body {
-  margin: 0;
-  display: flex;
-  flex-direction: column;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
 }
 
 .container {
-  flex: 1;
+    flex: 1;
 }
 
 .f-info {
@@ -104,6 +104,7 @@ body {
 .add-btn {
     border: none;
     background-color: #fe424d;
+    margin-bottom: 1rem;
 }
 
 /* Edit ejs */
@@ -196,6 +197,11 @@ body {
     font-size: 0.8rem;
 }
 
+.filter-link {
+    text-decoration: none;
+    color: inherit;
+}
+
 .tax-toggle {
     border: 1px solid black;
     border-radius: 1rem;
@@ -203,4 +209,15 @@ body {
     padding: 1rem;
     display: flex;
     align-items: center;
+}
+
+.form-check-input:checked {
+    background-color: #fe424d;
+    border-color: #fe424d;
+}
+
+.form-check-input:focus {
+    outline: 0;
+    border-color: #fe8a91;
+    box-shadow: 0 0 0 .25rem rgba(254, 66, 77, .25);
 }

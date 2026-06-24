@@ -3,7 +3,7 @@
     <body>
         <div class="row">
             <form action="/listings/new" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-                <div class="col-8 offset-2">
+                <div class="col-8 offset-2 mt-2">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="listing[title]" id="title" placeholder="Enter Title" class="form-control"
                         required>
@@ -11,9 +11,10 @@
                     <label for="title" class="form-label">Description</label>
                     <textarea type="text" name="listing[description]" id="description" placeholder="Enter description"
                         class="form-control" required></textarea><br>
-                    <label for="title" class="form-label">Image</label>
-                    <input type="file" name="listing[image]" id="image" placeholder="Enter image url/link"
-                        class="form-control" required><br>
+                    <label for="image" class="form-label">Upload Image</label>
+                    <input type="file" name="listing[image]" id="image" class="form-control"><br>
+                    <label for="imageUrl" class="form-label">Or Paste Image URL</label>
+                    <input type="text" name="listing[imageUrl]" id="imageUrl" placeholder="https://example.com/image.jpg" class="form-control"><br>
                     <div class="row">
                         <div class="col-md-4">
                             <label for="title" class="form-label">Location</label>
@@ -29,6 +30,23 @@
                     <label for="title" class="form-label">Country</label>
                     <input type="text" name="listing[country]" id="country" placeholder="Enter country"
                         class="form-control" required><br>
+                    <label for="category" class="form-label">Category</label>
+                    <select name="listing[category]" id="category" class="form-control" required>
+                        <option value="">Select a category</option>
+                        <option value="Trending">Trending</option>
+                        <option value="Rooms">Rooms</option>
+                        <option value="Iconic Cities">Iconic Cities</option>
+                        <option value="Mountains">Mountains</option>
+                        <option value="Castles">Castles</option>
+                        <option value="Pools">Pools</option>
+                        <option value="Camping">Camping</option>
+                        <option value="Farms">Farms</option>
+                        <option value="Arctic">Arctic</option>
+                        <option value="Beach">Beach</option>
+                        <option value="Lakes">Lakes</option>
+                        <option value="Domes">Domes</option>
+                        <option value="Boats">Boats</option>
+                    </select><br>
                     <button class="btn btn-bg-dark add-btn">Add</button>
                 </div>
             </form>

@@ -23,6 +23,9 @@
                         </p>
                         <p>Country: <%= listing.country %>
                         </p>
+                        <% if(listing.category) { %>
+                        <p>Category: <span class="badge" style="background-color:#fe424d;"><%= listing.category %></span></p>
+                        <% } %>
                         <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
                             <div class="show-btns">
                                 <a href="/listings/<%= listing._id %>/edit" class="btn btn-bg-dark edit-btn">Edit</a>
