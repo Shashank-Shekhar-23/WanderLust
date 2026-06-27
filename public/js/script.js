@@ -18,15 +18,15 @@
     })
 })()
 
-// 18% GST
+// 18% GST Toggle
 document.addEventListener("DOMContentLoaded", () => {
   const taxToggler = document.getElementById("flexSwitchCheck");
   if (taxToggler) {
-    taxToggler.addEventListener("click", () => {
+    taxToggler.addEventListener("change", () => {
       const basePrices = document.getElementsByClassName("base-price");
       const taxedPrices = document.getElementsByClassName("taxed-price");
       for (let i = 0; i < basePrices.length; i++) {
-        if (basePrices[i].style.display !== "none") {
+        if (taxToggler.checked) {
           basePrices[i].style.display = "none";
           taxedPrices[i].style.display = "inline";
         } else {
@@ -187,4 +187,5 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     });
   }
+
 });

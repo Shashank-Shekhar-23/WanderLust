@@ -8,7 +8,7 @@ const map = new mapboxgl.Map({
     container: 'map',
     style: 'mapbox://styles/mapbox/streets-v12',
     center: coordinates, // starting position [lng, lat]
-    zoom: 9
+    zoom: 12
 });
 
 const marker = new mapboxgl.Marker({ color: "red" })
