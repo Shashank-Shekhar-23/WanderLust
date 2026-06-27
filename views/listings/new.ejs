@@ -3,7 +3,7 @@
     <body>
         <div class="row">
             <form action="/listings/new" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-                <div class="col-8 offset-2 mt-2">
+                <div class="col-12 col-md-8 offset-md-2 mt-2">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="listing[title]" id="title" placeholder="Enter Title" class="form-control"
                         required>
@@ -12,7 +12,26 @@
                     <textarea type="text" name="listing[description]" id="description" placeholder="Enter description"
                         class="form-control" required></textarea><br>
                     <label for="image" class="form-label">Upload Image</label>
-                    <input type="file" name="listing[image]" id="image" class="form-control"><br>
+                    <div class="drag-drop-zone" id="dragDropZone">
+                        <div class="drag-drop-content">
+                            <i class="fa-solid fa-cloud-arrow-up cloud-icon"></i>
+                            <p class="drag-text">Drag files to upload</p>
+                            <span class="or-text">or</span>
+                            <button type="button" class="btn btn-outline-primary browse-btn" id="browseBtn">Browse Files</button>
+                            <p class="file-info-text">Max file size: 3MB</p>
+                            <p class="file-info-text">Supported file types: JPG, JPEG, PNG</p>
+                        </div>
+                        <input type="file" name="listing[image]" id="image" class="drag-drop-input" accept="image/png, image/jpeg, image/jpg">
+                        <div class="preview-container" id="previewContainer">
+                            <img id="imagePreview" src="" alt="Selected Preview">
+                            <div class="file-meta">
+                                <span id="fileName">file_name.jpg</span>
+                                <span id="fileSize">(1.2 MB)</span>
+                            </div>
+                            <button type="button" class="btn btn-sm btn-danger remove-file-btn" id="removeFileBtn"><i class="fa-solid fa-trash"></i> Remove</button>
+                        </div>
+                    </div>
+                    <div class="invalid-feedback text-danger" id="fileError" style="font-size: 0.875em; display: none; margin-top: -1rem; margin-bottom: 1rem;"></div>
                     <label for="imageUrl" class="form-label">Or Paste Image URL</label>
                     <input type="text" name="listing[imageUrl]" id="imageUrl" placeholder="https://example.com/image.jpg" class="form-control"><br>
                     <div class="row">

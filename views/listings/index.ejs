@@ -2,26 +2,28 @@
 
     <body>
         <div id="filters">
-            <% filters.forEach(filter=> { %>
-                <a href="<%= filter.link %>" class="filter-link">
-                    <div class="filter" style="opacity:<%= filter.isActive ? '1' : '0.7' %>;">
-                        <i class="fa-solid <%= filter.icon %>"></i>
-                        <p>
-                            <%= filter.name %>
-                        </p>
-                    </div>
-                </a>
-                <% }) %>
-                    <div class="tax-toggle">
-                        <div class="form-check-reverse form-switch">
-                            <input type="checkbox" class="form-check-input" role="switch" id="flexSwitchCheck">
-                            <label for="flexSwitchCheck" class="form-check-label">Display Taxes</label>
+            <div class="filter-options">
+                <% filters.forEach(filter=> { %>
+                    <a href="<%= filter.link %>" class="filter-link">
+                        <div class="filter" style="<%= filter.isActive ? 'opacity: 1 ;  color: #fe424d;' : null %>">
+                            <i class="fa-solid <%= filter.icon %>"></i>
+                            <p>
+                                <%= filter.name %>
+                            </p>
                         </div>
-                    </div>
+                    </a>
+                <% }) %>
+            </div>
+            <div class="tax-toggle">
+                <div class="form-check-reverse form-switch">
+                    <input type="checkbox" class="form-check-input" role="switch" id="flexSwitchCheck">
+                    <label for="flexSwitchCheck" class="form-check-label">Display Taxes</label>
+                </div>
+            </div>
         </div>
-        <div class="row">
+        <div class="listings-grid">
             <% for(let listing of allListings) { %>
-                <div class="card listing-card" style="width: 18rem;">
+                <div class="card listing-card">
                     <a href="/listings/<%= listing._id %>/" class="listing-link">
                         <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_imgs"
                             style="height: 20rem;">
