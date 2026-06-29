@@ -3,7 +3,7 @@
     <body>
         <script>
             const mapToken = "<%= process.env.MAP_TOKEN %>";
-            const listing = <%- JSON.stringify(listing) %>;
+            const listing = <% - JSON.stringify(listing) %>;
         </script>
         <div class="row">
             <div class="col-12 col-md-8 offset-md-2 show-card">
@@ -24,16 +24,19 @@
                         <p>Country: <%= listing.country %>
                         </p>
                         <% if(listing.category) { %>
-                        <p>Category: <span class="badge" style="background-color:#fe424d;"><%= listing.category %></span></p>
-                        <% } %>
-                        <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
-                            <div class="show-btns">
-                                <a href="/listings/<%= listing._id %>/edit" class="btn btn-bg-dark edit-btn">Edit</a>
-                                <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
-                                    <button class="btn btn-bg-dark edit-btn">Delete</button>
-                                </form>
-                            </div>
+                            <p>Category: <span class="badge" style="background-color:#fe424d;">
+                                    <%= listing.category %>
+                                </span></p>
                             <% } %>
+                                <% if(currUser && currUser._id.equals(listing.owner._id)) { %>
+                                    <div class="show-btns">
+                                        <a href="/listings/<%= listing._id %>/edit"
+                                            class="btn btn-bg-dark edit-btn">Edit</a>
+                                        <form action="/listings/<%= listing._id %>?_method=DELETE" method="post">
+                                            <button class="btn btn-bg-dark edit-btn">Delete</button>
+                                        </form>
+                                    </div>
+                                    <% } %>
             </div>
         </div>
 
@@ -80,14 +83,14 @@
                                             <p class="card-text">
                                                 <%= review.comment %>
                                             </p>
-                                            <p class="starability-result card-text" data-rating="<%= review.rating %>">
-                                            </p>
-                                            <% if(currUser && currUser._id.equals(listing.reviews._id)) { %>
-                                            <form class="mb-3" method="POST"
-                                                action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
-                                                <button class="btn btn-dark btn-sm">Delete</button>
-                                            </form>
-                                            <% } %>
+                                            <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+
+                                            <% if(currUser && currUser._id.equals(review.author._id)) { %>
+                                                <form class="mb-3" method="POST"
+                                                    action="/listings/<%= listing._id %>/reviews/<%= review._id %>?_method=DELETE">
+                                                    <button class="btn btn-dark btn-sm">Delete</button>
+                                                </form>
+                                                <% } %>
                                         </div>
                                     </div>
                                     <% } %>
