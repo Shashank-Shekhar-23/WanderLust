@@ -18,6 +18,13 @@
     })
 })()
 
+// Choices
+new Choices('#category', {
+    searchEnabled: true,
+    itemSelectText: '',
+    shouldSort: true
+});
+
 // 18% GST Toggle
 document.addEventListener("DOMContentLoaded", () => {
   const taxToggler = document.getElementById("flexSwitchCheck");

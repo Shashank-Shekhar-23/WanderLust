@@ -3,8 +3,11 @@
     <body>
         <script>
             const mapToken = "<%= process.env.MAP_TOKEN %>";
-            const listing = <% - JSON.stringify(listing) %>;
+            const listing = <%- JSON.stringify(listing) %>;
         </script>
+
+        <script type="module"
+            src="import 'https://ka-f.webawesome.com/webawesome@3.9.0/components/rating/rating.js';"></script>
         <div class="row">
             <div class="col-12 col-md-8 offset-md-2 show-card">
                 <h3>
@@ -83,7 +86,11 @@
                                             <p class="card-text">
                                                 <%= review.comment %>
                                             </p>
-                                            <p class="starability-result card-text" data-rating="<%= review.rating %>"></p>
+                                            <!-- <p class="starability-result card-text" data-rating="<%= review.rating %>"> -->
+                                            <p><wa-rating label="Rating" size="s" readonly
+                                                    style="--symbol-color-active: #FFC62A;"
+                                                    value="<%= review.rating %>"></wa-rating>
+                                            </p>
 
                                             <% if(currUser && currUser._id.equals(review.author._id)) { %>
                                                 <form class="mb-3" method="POST"

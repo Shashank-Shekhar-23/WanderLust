@@ -3,7 +3,7 @@
     <body>
         <div class="row">
             <form action="/listings/new" method="POST" novalidate class="needs-validation" enctype="multipart/form-data">
-                <div class="col-12 col-md-8 offset-md-2 mt-2">
+                <div class="col-12 col-md-8 offset-md-2 mt-2 mb-4">
                     <label for="title" class="form-label">Title</label>
                     <input type="text" name="listing[title]" id="title" placeholder="Enter Title" class="form-control"
                         required>
@@ -51,7 +51,6 @@
                         class="form-control" required><br>
                     <label for="category" class="form-label">Category</label>
                     <select name="listing[category]" id="category" class="form-control" required>
-                        <option value="">Select a category</option>
                         <option value="Trending">Trending</option>
                         <option value="Rooms">Rooms</option>
                         <option value="Iconic Cities">Iconic Cities</option>

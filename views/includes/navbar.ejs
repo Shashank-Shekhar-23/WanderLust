@@ -3,14 +3,11 @@
         <!-- Brand/Logo -->
         <div class="d-flex align-items-center justify-content-between">
             <a class="navbar-brand" href="/listings"><i class="fa-regular fa-compass"></i></a>
-            <a class="nav-link nav-explore d-none d-lg-block me-1" href="/listings">Explore</a>
+            <a class="nav-link nav-explore d-none d-lg-block me-1 col-text" href="/listings">Explore</a>
         </div>
 
-        <!-- Unified Navigation Items (No Hamburger Menu) -->
         <div class="d-flex align-items-center gap-2 gap-md-3">
-            <!-- Explore Link (hidden first on large mobile/tablet < 992px) -->
 
-            <!-- Search Form (Same as desktop, compacted on small devices) -->
             <form action="/listings" class="d-flex align-items-center search-form" role="search" method="GET">
                 <input type="text" name="search" class="form-control search-inp me-1 me-md-2"
                     placeholder="Search destination" value="<%= typeof search !== 'undefined' ? search : '' %>">
@@ -24,9 +21,8 @@
         <div class="d-flex align-items-center gap-2 gap-md-3">
 
             <!-- Become Host (hidden in navbar on screen < 768px, shown next to tax toggle instead) -->
-            <a class="nav-link nav-become-host d-none d-md-block" href="/listings/new">Become Host</a>
+            <a class="nav-link nav-become-host d-none d-md-block col-text" href="/listings/new">Become Host</a>
 
-            <!-- Auth links (always visible on the right) -->
             <div class="auth-links d-flex align-items-center gap-2 gap-md-3">
                 <% if (!currUser) { %>
                     <a class="nav-link" href="/signup"><b>Sign Up</b></a>
