@@ -24,7 +24,7 @@
             <a class="nav-link nav-become-host d-none d-md-block col-text" href="/listings/new">Become Host</a>
 
             <div class="auth-links d-flex align-items-center gap-2 gap-md-3">
-                <% if (!currUser) { %>
+                <% if (!locals.currUser) { %>
                     <a class="nav-link" href="/signup"><b>Sign Up</b></a>
                     <a class="nav-link" href="/login"><b>Log in</b></a>
                 <% } else { %>
