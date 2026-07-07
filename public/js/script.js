@@ -18,12 +18,15 @@
     })
 })()
 
-// Choices
-new Choices('#category', {
-    searchEnabled: true,
-    itemSelectText: '',
-    shouldSort: true
-});
+// Choices (only on pages that have a #category select)
+const categoryEl = document.getElementById('category');
+if (categoryEl) {
+    new Choices(categoryEl, {
+        searchEnabled: true,
+        itemSelectText: '',
+        shouldSort: true
+    });
+}
 
 // 18% GST Toggle
 document.addEventListener("DOMContentLoaded", () => {
